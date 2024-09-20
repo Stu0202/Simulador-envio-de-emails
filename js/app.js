@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
     function mostrarAlerta(mensaje,referencia) {
+        const alertaExiste = referencia.querySelector('.bg-red-600')
+
+        if (alertaExiste) {
+           alertaExiste.remove()
+        }
+
+
         const error = document.createElement('P')
         error.textContent = mensaje
         error.classList.add('bg-red-600','text-white','p-2','text-center')
