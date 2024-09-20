@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded',function(){
             return
        }
 
+       if(e.target.id === 'email'&& !validarEmail(e.target.value)){
+            mostrarAlerta('El email no es valido',e.target.parentElement)
+            return
+       }
        limiparAlerta(e.target.parentElement)
     }
 
@@ -38,5 +42,12 @@ document.addEventListener('DOMContentLoaded',function(){
            alertaExiste.remove()
         }
 
+    }
+
+    function validarEmail(email) {
+        const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ 
+        const resultado = regex.test(email)
+        return resultado
+    
     }
 })
