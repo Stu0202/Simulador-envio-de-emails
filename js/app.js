@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded',function(){
     const formulario = document.querySelector('#formulario')
     const btnSubmit = document.querySelector('#formulario button[type="submit"]')
     const btnReset = document.querySelector('#formulario button[type="reset"]')
+    const spinner = document.querySelector('#spinner')
+
 
     const email = {
         email: "",
@@ -17,16 +19,16 @@ document.addEventListener('DOMContentLoaded',function(){
     inputAsunto.addEventListener('input', validar)
     
     inputMensaje.addEventListener('input',validar)
+
+    formulario.addEventListener('submit',enviarEmail)
+
+
     btnReset.addEventListener('click',function (e) {
         
         e.preventDefault()
 
-        email.email = ''
-        email.asunto = ''
-        email.mensaje = ''
-        
-        formulario.reset()
-        comprobarEmail()
+        resetFormulario()
+       
 
     })
     
@@ -49,6 +51,28 @@ document.addEventListener('DOMContentLoaded',function(){
 
        email[e.target.name] = e.target.value.trim().toLowerCase()
        comprobarEmail()
+    }
+
+
+
+    function enviarEmail(e) {
+        e.preventDefault()
+
+        spinner.classList.add('flex')
+        spinner.classList.remove('hidden')
+
+
+        setTimeout(() => {
+            
+            spinner.classList.add('hidden')
+            
+            spinner.classList.remove('flex')
+
+            resetFormulario()
+
+
+        }, 3000);
+        
     }
 
 
@@ -88,5 +112,14 @@ document.addEventListener('DOMContentLoaded',function(){
         }
         btnSubmit.classList.remove('opacity-50')
         btnSubmit.disabled = false
+    }
+
+    function resetFormulario() {
+        email.email = ''
+        email.asunto = ''
+        email.mensaje = ''
+        
+        formulario.reset()
+        comprobarEmail()
     }
 })
